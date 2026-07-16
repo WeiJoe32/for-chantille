@@ -239,7 +239,7 @@ const steps = [
   {text:"Are you sure? 🥺",                          emoji:"🥺", yes:1.2,  no:0.8,  noText:"No 😢"},
   {text:"Are you sure sure? 😢",                     emoji:"😢", yes:1.45, no:0.6,  noText:"No…"},
   {text:"Sure sure sure?? 🥹",                       emoji:"🥹", yes:1.7,  no:0.45, noText:"no"},
-  {text:"You have to pick a yes 😌💗",               emoji:"😌", yes:1.7,  no:1.1,  noText:"YES!! 💖", final:true}
+  {text:"You have to pick a yes 😌💗",               emoji:"😌", yes:1.35, no:1.35, noText:"YES!! 💖", final:true}
 ];
 let step = 0;
 
@@ -254,6 +254,8 @@ function render(){
   askEmoji.textContent = s.emoji;
   yesBtn.style.transform = `scale(${s.yes})`;
   noBtn.style.transform = `scale(${s.no})`;
+  // scale() doesn't reserve layout space — pad the gap so grown buttons never overlap
+  noBtn.style.marginTop = (((s.yes - 1) * yesBtn.offsetHeight + Math.max(0, s.no - 1) * noBtn.offsetHeight) / 2) + 'px';
   noBtn.textContent = s.noText;
   noBtn.classList.toggle('as-yes', !!s.final);
   q.classList.remove('pop'); void q.offsetWidth; q.classList.add('pop');
