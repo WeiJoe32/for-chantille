@@ -113,11 +113,13 @@
     border:2px solid var(--blush-2);
   }
   .btn-no.as-yes{
-    background:linear-gradient(135deg,#ff8fab 0%,var(--pink) 100%);
+    background:linear-gradient(135deg,var(--pink) 0%,var(--pink-dark) 100%);
     color:#fff;
     border:none;
     box-shadow:0 8px 20px rgba(255,92,141,.45);
   }
+  /* final screen: force both buttons to identical size */
+  .btn.twin{width:200px;padding:14px 0}
 
   /* ---------- win screen ---------- */
   #win{display:none}
@@ -258,6 +260,8 @@ function render(){
   noBtn.style.marginTop = (((s.yes - 1) * yesBtn.offsetHeight + Math.max(0, s.no - 1) * noBtn.offsetHeight) / 2) + 'px';
   noBtn.textContent = s.noText;
   noBtn.classList.toggle('as-yes', !!s.final);
+  yesBtn.classList.toggle('twin', !!s.final);
+  noBtn.classList.toggle('twin', !!s.final);
   q.classList.remove('pop'); void q.offsetWidth; q.classList.add('pop');
 }
 
